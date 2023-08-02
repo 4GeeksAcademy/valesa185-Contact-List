@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
+import EditContact from "../views/EditContact";
+import { Link } from "react-router-dom";
 
 const Card = ({ contact }) => {
+  const { store, actions } = useContext(Context);
+
+  const handleEditClick = () => {
+    actions.startEditing(contact.id);
+  };
+
   return (
     <div className="d-flex justify-content-center">
       <div className="card mb-3" style={{ maxWidth: "1000px" }}>
@@ -28,12 +37,22 @@ const Card = ({ contact }) => {
             </div>
           </div>
           <div className="col-md-3 d-flex flex-column mt-4 ">
-            <button type="button" className="btn btn-primary mt-3 me-4">
-              Edit
-            </button>
-            <button type="button" className="btn btn-danger mt-3 me-4 ">
-              Delete
-            </button>
+            {!contact.isEditing ? (
+              <>
+                <button
+                  type="button"
+                  className="btn btn-primary mt-3 me-4"
+                  onClick={handleEditClick}
+                >
+                  Edit
+                </button>
+                <button type="button" className="btn btn-danger mt-3 me-4">
+                  Delete
+                </button>
+              </>
+            ) : (
+              <EditContact contact={contact} />
+            )}
           </div>
         </div>
       </div>
