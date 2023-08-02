@@ -75,6 +75,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         setStore({ contacts });
       },
+      saveNewContact: (newContact) => {
+        const store = getStore();
+        // Generar un nuevo ID para el contacto
+        const newId = store.contacts.length + 1;
+        const contacts = [
+          ...store.contacts,
+          { ...newContact, id: newId, isEditing: false },
+        ];
+        setStore({ contacts });
+      },
     },
   };
 };

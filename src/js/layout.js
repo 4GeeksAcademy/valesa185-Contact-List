@@ -6,7 +6,8 @@ import { Home } from "./views/Home";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
-import EditContact from "./views/EditContact"; 
+import EditContact from "./views/EditContact";
+import { NewContact } from "./views/NewContact";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -18,7 +19,8 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/edit/:contactId" element={<EditContact />} />{" "}
+            <Route path="/edit/:contactId" element={<EditContact />} />
+            <Route path="/new" element={<NewContact />} />
             <Route path="*" element={<h1>Not found!</h1>} />
           </Routes>
         </ScrollToTop>
