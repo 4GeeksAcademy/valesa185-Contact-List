@@ -41,7 +41,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
     },
     actions: {
-      // Otras acciones...
       startEditing: (contactId) => {
         const store = getStore();
         const contacts = store.contacts.map((contact) => {
@@ -53,6 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         setStore({ contacts });
       },
+
       cancelEditing: (contactId) => {
         const store = getStore();
         const contacts = store.contacts.map((contact) => {
@@ -64,6 +64,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         setStore({ contacts });
       },
+
       saveEditedContact: (editedContact) => {
         const store = getStore();
         const contacts = store.contacts.map((contact) => {
@@ -75,15 +76,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         setStore({ contacts });
       },
+
       saveNewContact: (newContact) => {
         const store = getStore();
-        // Generar un nuevo ID para el contacto
         const newId = store.contacts.length + 1;
         const contacts = [
           ...store.contacts,
           { ...newContact, id: newId, isEditing: false },
         ];
         setStore({ contacts });
+      },
+
+      deleteContact: (contactId) => {
+        const store = getStore();
+        const filteredContacts = store.contacts.filter(
+          (contact) => contact.id !== contactId
+        );
+        setStore({ contacts: filteredContacts });
       },
     },
   };

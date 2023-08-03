@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import EditContact from "../views/EditContact";
-import { Link } from "react-router-dom";
 
 const Card = ({ contact }) => {
   const { store, actions } = useContext(Context);
 
   const handleEditClick = () => {
     actions.startEditing(contact.id);
+  };
+
+  const handleDeleteClick = () => {
+    actions.deleteContact(contact.id);
   };
 
   return (
@@ -46,7 +49,11 @@ const Card = ({ contact }) => {
                 >
                   Edit
                 </button>
-                <button type="button" className="btn btn-danger mt-3 me-4">
+                <button
+                  type="button"
+                  className="btn btn-danger mt-3 me-4"
+                  onClick={handleDeleteClick}
+                >
                   Delete
                 </button>
               </>
